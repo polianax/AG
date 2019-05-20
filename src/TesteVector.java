@@ -13,9 +13,9 @@ public class TesteVector {
 		int[] risco = {4,50};
 		int[] importancia = {100,2};
 		
-		float res = i.fitness(individuo, risco, importancia);
+	//	float res = i.fitness(individuo, risco, importancia);
 		
-		System.out.println("Resultador: "+ res);
+	//	System.out.println("Resultador: "+ res);
 
 	}
 }

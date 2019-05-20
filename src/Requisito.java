@@ -9,7 +9,6 @@ public class Requisito {
 	
 	
 	public Requisito(int indice, int custo, int risco, int importancia) {
-		super();
 		this.importancia = importancia;
 		this.custo = custo;
 		this.risco = risco;

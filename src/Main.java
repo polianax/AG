@@ -35,7 +35,10 @@ public class Main {
 		
 //gerando populacao inicial
 		
-		Individuo
+		//Individuo.gerarPopulacaoInicial(2,3);
+		
+		
+		
 		
 
 	}
