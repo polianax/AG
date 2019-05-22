@@ -12,7 +12,7 @@ public class Solucao {
 			if (individuo.get(i)>0){
 				y = 1;
 			}
-			fitness = ((req.get(i).getImportancia() * (rel.size()-individuo.get(i)+1)) - (req.get(i).getRisco()*individuo.get(i))) * y;
+			fitness = fitness + ( ((req.get(i).getImportancia() * (rel.size()-individuo.get(i)+1)) - (req.get(i).getRisco()*individuo.get(i))) * y);
 			
 		}
 		return fitness;
@@ -62,4 +62,23 @@ public class Solucao {
 		
 		return populacao;
 	}
+
+	public List roleta(List<Integer> pontuacao){
+		
+		int totalFitness = 0;
+		
+		for (int i = 0; i < pontuacao.size(); i++) {
+
+			totalFitness = pontuacao.get(i);
+		}
+		
+		Random r = new Random();
+		int valorSorteado = r.nextInt(totalFitness);
+		
+		
+		List<Integer> novos = new ArrayList<Integer>();
+		
+		return novos;
+	}
+
 }
