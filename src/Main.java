@@ -60,18 +60,22 @@ public class Main {
 		
 		//Individuo.gerarPopulacaoInicial(2,3);
 		GeradorPopulacaoInicial p0 = new GeradorPopulacaoInicial();
-
 		
-		p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+		List<Integer> ind = new ArrayList<Integer>();
+		
+		ind = p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+		
+		
 		
 		System.out.println(" ");
 		
-		GeradorRequisitosOrd p1 = new GeradorRequisitosOrd();
+		System.out.println(p0.fitness(ind, requisitos, releases));
+		
+		//GeradorRequisitosOrd p1 = new GeradorRequisitosOrd();
 
 		
-		p1.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+		//p1.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
 		
-
 	}
 
 }

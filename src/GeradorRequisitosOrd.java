@@ -9,9 +9,9 @@ public class GeradorRequisitosOrd {
 
 			int[] vetor = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-			rel.get(0).setCusto(135);
-			rel.get(1).setCusto(135);
-			rel.get(2).setCusto(135);
+			rel.get(0).setCusto(125);
+			rel.get(1).setCusto(125);
+			rel.get(2).setCusto(125);
 			
 			for (int i = 0; i < contadorRequisitos; i++) {
 
