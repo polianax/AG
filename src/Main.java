@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -25,20 +29,47 @@ public class Main {
 		Requisito r7 = new Requisito(8, 70, 7, (c1*9+c2*8+c3*3));
 		Requisito r8 = new Requisito(9, 50, 6, (c1*6+c2*7+c3*5));
 		Requisito r9 = new Requisito(10, 20, 6, (c1*10+c2*10+c3*7));
+		
+		List<Requisito> requisitos = new ArrayList<Requisito>();
+		
+		requisitos.add(r0);
+		requisitos.add(r1);
+		requisitos.add(r2);
+		requisitos.add(r3);
+		requisitos.add(r4);
+		requisitos.add(r5);
+		requisitos.add(r6);
+		requisitos.add(r7);
+		requisitos.add(r8);
+		requisitos.add(r9);
 				
 //gerando releases
 		
-		Release k0 = new Release(125,1);
-		Release k1 = new Release(125,2);
-		Release k2 = new Release(125,3);
+		Release k1 = new Release(125,1);
+		Release k2 = new Release(125,2);
+		Release k3 = new Release(125,3);
+		
+		List<Release> releases = new ArrayList<Release>();
+		
+		releases.add(k1);
+		releases.add(k2);
+		releases.add(k3);
 	
 		
 //gerando populacao inicial
 		
 		//Individuo.gerarPopulacaoInicial(2,3);
+		GeradorPopulacaoInicial p0 = new GeradorPopulacaoInicial();
+
 		
+		p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
 		
+		System.out.println(" ");
 		
+		GeradorRequisitosOrd p1 = new GeradorRequisitosOrd();
+
+		
+		p1.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
 		
 
 	}
