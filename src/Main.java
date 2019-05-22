@@ -11,11 +11,10 @@ public class Main {
 		double taxaMutacao = 0.15;
 		double taxaCruzamento = 0.90;
 		double numGeracoes = 300;
-		double numPopulacaoInicial = 20;
+		int numPopulacaoInicial = 100;
 		int c1 = 3;
 		int c2 = 4;
 		int c3 = 2;
-		
 		
 //gerando requisitos
 
@@ -59,23 +58,42 @@ public class Main {
 //gerando populacao inicial
 		
 		//Individuo.gerarPopulacaoInicial(2,3);
-		GeradorPopulacaoInicial p0 = new GeradorPopulacaoInicial();
+		Solucao p0 = new Solucao();
 		
-		List<Integer> ind = new ArrayList<Integer>();
+		List<Integer> individuo = new ArrayList<Integer>();
 		
-		ind = p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+		List<List> populacao = new ArrayList<List>();
 		
+		List<Integer> pontuacao = new ArrayList<Integer>();
 		
+		for (int i=0; i<numPopulacaoInicial; i++){
+			individuo = p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+			populacao.add(individuo);
+
+		}
 		
+		//calcula fitness da populacao
+		
+		for (int i=0; i<numPopulacaoInicial; i++){
+			
+			int  fit = p0.fitness(populacao.get(i), requisitos, releases);
+			pontuacao.add(fit);
+
+		}
+			
 		System.out.println(" ");
 		
-		System.out.println(p0.fitness(ind, requisitos, releases));
-		
-		//GeradorRequisitosOrd p1 = new GeradorRequisitosOrd();
+		//System.out.println(p0.fitness(individuo, requisitos, releases));
+		for (int i=0; i<numPopulacaoInicial; i++){
+			System.out.print("[");
+			for (int j=0; j<individuo.size()-1; j++){
+				System.out.print(populacao.get(i).get(j) + ", ");
+			}
+			System.out.println(populacao.get(i).get(individuo.size()-1) + "]");
+			System.out.println("Fitness: " + pontuacao.get(i));
+			System.out.println("-----------------------");
+			
+		}
 
-		
-		//p1.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
-		
 	}
-
 }
