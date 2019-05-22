@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -17,7 +19,8 @@ public class Main {
 		int c3 = 2;
 		
 //gerando requisitos
-
+	//	Map<String,Requisito> map = new TreeMap<String,Requisito>();
+		
 		Requisito r0 = new Requisito(1, 60, 3, (c1*10+c2*10+c3*5));
 		Requisito r1 = new Requisito(2, 40, 6, (c1*8+c2*10+c3*6));
 		Requisito r2 = new Requisito(3, 40, 2, (c1*6+c2*4+c3*8));
@@ -28,6 +31,24 @@ public class Main {
 		Requisito r7 = new Requisito(8, 70, 7, (c1*9+c2*8+c3*3));
 		Requisito r8 = new Requisito(9, 50, 6, (c1*6+c2*7+c3*5));
 		Requisito r9 = new Requisito(10, 20, 6, (c1*10+c2*10+c3*7));
+		
+		/*map.put("r0", r0);
+		map.put("r1", r0);
+		map.put("r2", r0);
+		map.put("r3", r0);
+		map.put("r4", r0);
+		map.put("r5", r0);
+		map.put("r6", r0);
+		map.put("r7", r0);
+		map.put("r8", r0);
+		
+		for (int i = 0; i < 100; i++) {
+			map.put("r"+i,  new Requisito(7, 25, 9, (c1*6+c2*6+c3*4)));
+		}
+		
+		for (int i = 0; i < 100; i++) {
+			Requisito r = map.get("r"+i);
+		}*/
 		
 		List<Requisito> requisitos = new ArrayList<Requisito>();
 		
@@ -94,6 +115,13 @@ public class Main {
 			System.out.println("-----------------------");
 			
 		}
+		
+		System.out.print("Fitness: [");
+		for (int i=0; i<numPopulacaoInicial-1; i++){
+			
+				System.out.println(pontuacao.get(i)+ ", ");
 
+		}
+		System.out.print( pontuacao.get(numPopulacaoInicial-1));
 	}
 }
