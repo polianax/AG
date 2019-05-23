@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import java.lang.Math;
 
 public class Main {
 
@@ -12,7 +13,7 @@ public class Main {
 		
 		double taxaMutacao = 0.15;
 		double taxaCruzamento = 0.90;
-		double numGeracoes = 300;
+		int numGeracoes = 300;
 		int numPopulacaoInicial = 100;
 		int c1 = 3;
 		int c2 = 4;
@@ -57,7 +58,7 @@ public class Main {
 		
 		//gerando populacao inicial
 		for (int i=0; i<numPopulacaoInicial; i++){
-			individuo = p0.gerarPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
+			individuo = p0.geraPopulacaoInicial(Requisito.getContadorRequisitos(), Release.getContadorReleases(), requisitos, releases);	
 			populacao.add(individuo);
 
 		}
@@ -71,7 +72,40 @@ public class Main {
 		}
 		
 		
-		
+		for (int i = 0; i < numGeracoes; i++) {
+			
+			//Math m = new Math();
+			double numeroSelecao = Math.round((1-taxaCruzamento) * numPopulacaoInicial);
+			double numeroFilhos = numPopulacaoInicial - numeroSelecao;
+			
+			//lista que ira armazenar individuos da geracao
+			List<List> geracao = new ArrayList<List>();
+			
+			//lista que ira armazenar pontuação da geracao
+			List<Integer> pontuacaoGeracao = new ArrayList<Integer>();
+
+			//for para selecionar os individuos que vão direto para a proxima geracao
+			for (int j = 0; j < numeroSelecao; j++) {
+				
+				geracao.add(p0.torneioBinario(pontuacao, populacao));
+			}
+			
+			for (int k = 0; k < numeroFilhos; k=k+2) {
+				
+				List<List> filhosSelecionados = new ArrayList<List>();
+				filhosSelecionados = p0.cruzamento(p0.torneioBinario(pontuacao, populacao), p0.torneioBinario(pontuacao, populacao));
+				//reparando filhos obtidos
+				filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
+				filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
+				geracao.add(filhosSelecionados.get(0));
+				geracao.add(filhosSelecionados.get(1));
+				
+				
+			}
+			
+
+			
+		}
 		
 		
 		

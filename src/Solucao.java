@@ -18,7 +18,7 @@ public class Solucao {
 		return fitness;
 	}
 
-	public List gerarPopulacaoInicial(int contadorRequisitos, int contadorReleases, List<Requisito> req,  List<Release> rel) {
+	public List geraPopulacaoInicial(int contadorRequisitos, int contadorReleases, List<Requisito> req,  List<Release> rel) {
 
 		List<Integer> individuo = new ArrayList<Integer>();
 		List<Integer> vetorEmb = new ArrayList<Integer>();
@@ -54,7 +54,7 @@ public class Solucao {
 		
 	}
 	
-	public List cruzamento(List<Integer> pai1, List<Integer> pai2, int taxaCruzamento){
+	public List cruzamento(List<Integer> pai1, List<Integer> pai2){
 		List<List> filhos = new ArrayList<List>();
 		List<Integer> filho1 = new ArrayList<Integer>();
 		List<Integer> filho2 = new ArrayList<Integer>();
