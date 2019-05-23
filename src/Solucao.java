@@ -113,25 +113,29 @@ public class Solucao {
 			
 			if (individuo.get(i) == 1) {
 				
-				custoR1 = custoR1 + req.get(i).getCusto();
-				if (custoR1 > rel.get(0).getCusto()) {
+				if ((custoR1 + req.get(i).getCusto()) > rel.get(0).getCusto()) {
 					individuo.set(i, 0);
+				} else {
+					custoR1 = custoR1 + req.get(i).getCusto();
 				}
 			} else if (individuo.get(i) == 2) {
 				
-				custoR2 = custoR2 + req.get(i).getCusto();
-				if (custoR2 > rel.get(1).getCusto()) {
+				
+				if ((custoR2 + req.get(i).getCusto()) > rel.get(1).getCusto()) {
 					individuo.set(i, 0);
+				} else {
+					custoR2 = custoR2 + req.get(i).getCusto();
 				}
+				
 			} else if (individuo.get(i) == 3) {
 				
-				custoR3 = custoR3 + req.get(i).getCusto();
-				if (custoR3 > rel.get(2).getCusto()) {
+				if ((custoR3 + req.get(i).getCusto()) > rel.get(2).getCusto()) {
 					individuo.set(i, 0);
+				} else {
+
+					custoR3 = custoR3 + req.get(i).getCusto();
 				}
-			} else {
-				
-			}
+			} 
 		}
 		for (int i = 0; i < individuo.size(); i++) {
 			if (individuo.get(i) == 0) {
@@ -144,9 +148,13 @@ public class Solucao {
 		for (int r = 0; r < requisitosZerados.size(); r++) {
 			Random x = new Random();
 			int releaseSorteada = x.nextInt(rel.size());
-			if (requisitosZerados.get(r) >= rel.get(releaseSorteada).getCusto()){
-				individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
+			if(releaseSorteada == 0){
+				if (req.get(requisitosZerados.get(r)).getCusto() <= rel.get(releaseSorteada).getCusto()-custoR1){
+					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
+					custoR1 = custoR1 + req.get(r).getCusto(); 
+				}
 			}
+
 		}
 		
 

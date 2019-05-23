@@ -84,8 +84,8 @@ public class Main {
 		
 		/*for (int j=0; j<individuo.size()-1; j++){
 			System.out.print(populacao.get(melhorInicial).get(j) + ", ");
-		}
-		*/
+		}*/
+		
 		System.out.println(populacao.get(melhorPosInicial).get(individuo.size()-1) + "] ");
 		System.out.println(populacao.size());
 		
@@ -136,10 +136,10 @@ public class Main {
 				List<List> filhosSelecionados = new ArrayList<List>();
 				filhosSelecionados = p0.cruzamento(p0.torneioBinario(pontuacao, populacao), p0.torneioBinario(pontuacao, populacao));
 				//reparando filhos obtidos
-			    filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
+				filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
 				filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
-				//filhosSelecionados.set(0,filhosSelecionados.get(0));
-				//filhosSelecionados.set(1,filhosSelecionados.get(1));
+			//	filhosSelecionados.set(0,filhosSelecionados.get(0));
+			//	filhosSelecionados.set(1,filhosSelecionados.get(1));
 				geracao.add(filhosSelecionados.get(0));
 				geracao.add(filhosSelecionados.get(1));
 				

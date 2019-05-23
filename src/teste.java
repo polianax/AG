@@ -66,16 +66,18 @@ public class teste {
 		filhos = p0.cruzamento(pai1, pai2);
 		
 		for (int i = 0; i < pai1.size(); i++) {
-			System.out.print(filhos.get(0).get(i));
+			System.out.print(filhos.get(0).get(i) + " ");
 			System.out.println(filhos.get(1).get(i));
 		}
+		 
+		System.out.println("  ");
 		
 		filhos.set(0, p0.reparo(filhos.get(0), requisitos, releases));
 		filhos.set(1, p0.reparo(filhos.get(1), requisitos, releases));
 
 		
 		for (int i = 0; i < pai1.size(); i++) {
-			System.out.print(filhos.get(0).get(i));
+			System.out.print(filhos.get(0).get(i) +" ");
 			System.out.println(filhos.get(1).get(i));
 		}
 	
