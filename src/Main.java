@@ -11,7 +11,7 @@ public class Main {
 		
 		//parametros da GA
 		
-		double taxaMutacao = 0.15;
+		double taxaMutacao = 0.0;
 		double taxaCruzamento = 0.90;
 		int numGeracoes = 300;
 		int numPopulacaoInicial = 100;
@@ -23,16 +23,16 @@ public class Main {
 		
 		List<Requisito> requisitos = new ArrayList<Requisito>();
 		
-		requisitos.add(new Requisito(1, 60, 3, (c1*10+c2*10+c3*5)/3));
-		requisitos.add(new Requisito(2, 40, 6, (c1*8+c2*10+c3*6)/3));
-		requisitos.add(new Requisito(3, 40, 2, (c1*6+c2*4+c3*8)/3));
-		requisitos.add(new Requisito(4, 30, 6, (c1*5+c2*9+c3*1)/3));
-		requisitos.add(new Requisito(5, 20, 4, (c1*7+c2*7+c3*5)/3));
-		requisitos.add(new Requisito(6, 20, 8, (c1*8+c2*6+c3*2)/3));
-		requisitos.add(new Requisito(7, 25, 9, (c1*6+c2*6+c3*4)/3));
-		requisitos.add(new Requisito(8, 70, 7, (c1*9+c2*8+c3*3)/3));
-		requisitos.add(new Requisito(9, 50, 6, (c1*6+c2*7+c3*5)/3));
-		requisitos.add(new Requisito(10, 20, 6, (c1*10+c2*10+c3*7)/3));
+		requisitos.add(new Requisito(1, 60, 3, (c1*10+c2*10+c3*5)));
+		requisitos.add(new Requisito(2, 40, 6, (c1*8+c2*10+c3*6)));
+		requisitos.add(new Requisito(3, 40, 2, (c1*6+c2*4+c3*8)));
+		requisitos.add(new Requisito(4, 30, 6, (c1*5+c2*9+c3*1)));
+		requisitos.add(new Requisito(5, 20, 4, (c1*7+c2*7+c3*5)));
+		requisitos.add(new Requisito(6, 20, 8, (c1*8+c2*6+c3*2)));
+		requisitos.add(new Requisito(7, 25, 9, (c1*6+c2*6+c3*4)));
+		requisitos.add(new Requisito(8, 70, 7, (c1*9+c2*8+c3*3)));
+		requisitos.add(new Requisito(9, 50, 6, (c1*6+c2*7+c3*5)));
+		requisitos.add(new Requisito(10, 20, 6, (c1*10+c2*10+c3*7)));
 				
 		//gerando releases e armazenando em uma lista
 
@@ -48,7 +48,7 @@ public class Main {
 		Solucao p0 = new Solucao();
 		
 		//gerando lista que ira armazenar as releases sorteadas para cada requisito
-		List<Integer> individuo = new ArrayList<Integer>();
+		List<Integer> individuo = new ArrayList<Integer>(); 
 		
 		//gerando lista que ira armazenar os individos que irão compor a população inicial
 		List<List> populacao = new ArrayList<List>();
@@ -96,7 +96,7 @@ public class Main {
 			
 			int melhorResultado = 0; //aramazenara o melhor fitness
 			int melhorPosicao = 0; //armazenara a posicao na população referente a melhor solução
-			
+			pontuacao.clear(); //limpa a lista de fitness
 			for (int y=0; y<numPopulacaoInicial; y++){
 				
 				int  fitGeracaoAnterior = p0.fitness(populacao.get(y), requisitos, releases);
@@ -136,22 +136,22 @@ public class Main {
 				List<List> filhosSelecionados = new ArrayList<List>();
 				filhosSelecionados = p0.cruzamento(p0.torneioBinario(pontuacao, populacao), p0.torneioBinario(pontuacao, populacao));
 				//reparando filhos obtidos
-			//    filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
-				//filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
-				filhosSelecionados.set(0,filhosSelecionados.get(0));
-				filhosSelecionados.set(1,filhosSelecionados.get(1));
+			    filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
+				filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
+				//filhosSelecionados.set(0,filhosSelecionados.get(0));
+				//filhosSelecionados.set(1,filhosSelecionados.get(1));
 				geracao.add(filhosSelecionados.get(0));
 				geracao.add(filhosSelecionados.get(1));
 				
 				
 			}
 			
-			//laço para realizar mutacao dos individuos
-			for (int z = 0; z < numeroMutacao; z++) {
+			//laço para realizar mutacao dos individuos, comeco em 1 para que o primeiro individuo (o eleito da geracao anterior) não seja mutado
+			for (int z = 1; z < numeroMutacao; z++) {
 				Random r = new Random();
 				int indiceSorteado = r.nextInt(populacao.size());
-			//	geracao.set(indiceSorteado,p0.reparo(p0.realizaMutacao(geracao.get(indiceSorteado)),requisitos,releases));
-				geracao.set(indiceSorteado,p0.realizaMutacao(geracao.get(indiceSorteado)));
+				geracao.set(indiceSorteado,p0.reparo(p0.realizaMutacao(geracao.get(indiceSorteado)),requisitos,releases));
+			//	geracao.set(indiceSorteado,p0.realizaMutacao(geracao.get(indiceSorteado)));
 			}
 
 			
