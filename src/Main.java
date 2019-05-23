@@ -23,16 +23,16 @@ public class Main {
 		
 		List<Requisito> requisitos = new ArrayList<Requisito>();
 		
-		requisitos.add(new Requisito(1, 60, 3, (c1*10+c2*10+c3*5)));
-		requisitos.add(new Requisito(2, 40, 6, (c1*8+c2*10+c3*6)));
-		requisitos.add(new Requisito(3, 40, 2, (c1*6+c2*4+c3*8)));
-		requisitos.add(new Requisito(4, 30, 6, (c1*5+c2*9+c3*1)));
-		requisitos.add(new Requisito(5, 20, 4, (c1*7+c2*7+c3*5)));
-		requisitos.add(new Requisito(6, 20, 8, (c1*8+c2*6+c3*2)));
-		requisitos.add(new Requisito(7, 25, 9, (c1*6+c2*6+c3*4)));
-		requisitos.add(new Requisito(8, 70, 7, (c1*9+c2*8+c3*3)));
-		requisitos.add(new Requisito(9, 50, 6, (c1*6+c2*7+c3*5)));
-		requisitos.add(new Requisito(10, 20, 6, (c1*10+c2*10+c3*7)));
+		requisitos.add(new Requisito(1, 60, 3, (c1*10+c2*10+c3*5)/3));
+		requisitos.add(new Requisito(2, 40, 6, (c1*8+c2*10+c3*6)/3));
+		requisitos.add(new Requisito(3, 40, 2, (c1*6+c2*4+c3*8)/3));
+		requisitos.add(new Requisito(4, 30, 6, (c1*5+c2*9+c3*1)/3));
+		requisitos.add(new Requisito(5, 20, 4, (c1*7+c2*7+c3*5)/3));
+		requisitos.add(new Requisito(6, 20, 8, (c1*8+c2*6+c3*2)/3));
+		requisitos.add(new Requisito(7, 25, 9, (c1*6+c2*6+c3*4)/3));
+		requisitos.add(new Requisito(8, 70, 7, (c1*9+c2*8+c3*3)/3));
+		requisitos.add(new Requisito(9, 50, 6, (c1*6+c2*7+c3*5)/3));
+		requisitos.add(new Requisito(10, 20, 6, (c1*10+c2*10+c3*7)/3));
 				
 		//gerando releases e armazenando em uma lista
 
