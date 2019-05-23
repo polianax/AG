@@ -23,7 +23,7 @@ public class Solucao {
 		List<Integer> individuo = new ArrayList<Integer>();
 		List<Integer> vetorEmb = new ArrayList<Integer>();
 		
-		//gera vetor soluÃ§Ã£o e vetor a ser embaralhado para auxiliar na geraÃ§Ã£o da populaÃ§Ã£o inicial
+		//gera vetor solução e vetor a ser embaralhado para auxiliar na geração da população inicial
 		for (int i = 0; i < contadorRequisitos; i++){
 			individuo.add(0);
 			vetorEmb.add(i);
@@ -54,13 +54,28 @@ public class Solucao {
 		
 	}
 	
-	public List cruzamento(List<List> populacao, int taxaCruzamento){
-		int tamanhoIndividuo = populacao.get(0).size();
+	public List cruzamento(List<Integer> pai1, List<Integer> pai2, int taxaCruzamento){
+		List<List> filhos = new ArrayList<List>();
+		List<Integer> filho1 = new ArrayList<Integer>();
+		List<Integer> filho2 = new ArrayList<Integer>();
+		int tamanhoIndividuo = pai1.size();
 		Random r = new Random();
-		int pontoCorte = r.nextInt(tamanhoIndividuo-2)+1;
+		int pontoCorte = r.nextInt(tamanhoIndividuo-1)+1;
 		
 		
-		return populacao;
+		for (int i = 0; i < pontoCorte ; i++) {
+			filho2.add(pai1.get(i));
+			filho1.add(pai2.get(i));
+		}
+		
+		for (int j = pontoCorte; j < pai1.size() ; j++) {
+			filho2.add(pai1.get(j));
+			filho1.add(pai2.get(j));
+		}
+		filhos.add(filho1);
+		filhos.add(filho2);
+		
+		return filhos;
 	}
 
 	public List roleta(List<Integer> pontuacao){

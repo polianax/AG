@@ -7,9 +7,7 @@ import java.util.TreeMap;
 public class Main {
 
 	public static void main(String[] args) {
-
-		double pesoImportacia = 1;
-		double pesoRisco = 1;
+		
 		double taxaMutacao = 0.15;
 		double taxaCruzamento = 0.90;
 		double numGeracoes = 300;
@@ -104,6 +102,9 @@ public class Main {
 			
 		System.out.println(" ");
 		
+		int melhorResultado = 0;
+		int melhorPosicao = 0;
+		
 		//System.out.println(p0.fitness(individuo, requisitos, releases));
 		for (int i=0; i<numPopulacaoInicial; i++){
 			System.out.print("[");
@@ -114,14 +115,26 @@ public class Main {
 			System.out.println("Fitness: " + pontuacao.get(i));
 			System.out.println("-----------------------");
 			
+			if (melhorResultado<pontuacao.get(i)){
+				melhorResultado=pontuacao.get(i);
+				melhorPosicao = i;
+			}
+			
 		}
 		
-		System.out.print("Fitness: [");
+		System.out.println("************ Melhor Solução:" + melhorResultado + " Posição: " + melhorPosicao);
+		
+		for (int j=0; j<individuo.size(); j++){
+			System.out.print(populacao.get(melhorPosicao).get(j) + ", ");
+		}
+		
+		
+	/*	System.out.print("Fitness: [");
 		for (int i=0; i<numPopulacaoInicial-1; i++){
 			
 				System.out.println(pontuacao.get(i)+ ", ");
 
 		}
-		System.out.print( pontuacao.get(numPopulacaoInicial-1));
+		System.out.print( pontuacao.get(numPopulacaoInicial-1));*/
 	}
 }
