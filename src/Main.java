@@ -9,7 +9,7 @@ public class Main {
 		
 		//parametros da GA
 		
-		double taxaMutacao = 0.0;
+		double taxaMutacao = 0.00;
 		double taxaCruzamento = 0.90;
 		int numGeracoes = 300;
 		int numPopulacaoInicial = 300;
@@ -48,10 +48,10 @@ public class Main {
 		//gerando lista que ira armazenar as releases sorteadas para cada requisito
 		List<Integer> individuo = new ArrayList<Integer>(); 
 		
-		//gerando lista que ira armazenar os individos que irão compor a população inicial
+		//gerando lista que ira armazenar os individos que irÃ£o compor a populaÃ§Ã£o inicial
 		List<List> populacao = new ArrayList<List>();
 		
-		//gerando lista que ira armazenar os fitness de toda a população
+		//gerando lista que ira armazenar os fitness de toda a populaÃ§Ã£o
 		List<Integer> pontuacao = new ArrayList<Integer>();
 		
 		//gerando populacao inicial
@@ -77,10 +77,10 @@ public class Main {
 
 		}
 		
-		// imprime informações referente a populacao inicial
+		// imprime informaÃ§Ãµes referente a populacao inicial
 
 		
-		System.out.print("*** Melhor solução incial  -----  Fitness: " + melhorInicial + "     Posição: " + melhorPosInicial + "   ' Vetor: [");
+		System.out.print("*** Melhor soluÃ§Ã£o incial  -----  Fitness: " + melhorInicial + "     PosiÃ§Ã£o: " + melhorPosInicial + "   ' Vetor: [");
 		
 		/*for (int j=0; j<individuo.size()-1; j++){
 			System.out.print(populacao.get(melhorInicial).get(j) + ", ");
@@ -95,11 +95,11 @@ public class Main {
 		double numeroMutacao = Math.round(numPopulacaoInicial * taxaMutacao);
 
 		
-		//aqui ocorrem os operadores de cruzamento, mutação e seleção pelo número de gerações selecionadas
+		//aqui ocorrem os operadores de cruzamento, mutaÃ§Ã£o e seleÃ§Ã£o pelo nÃºmero de geraÃ§Ãµes selecionadas
 		for (int i = 0; i < numGeracoes; i++) {
 			
-			int melhorResultado = 0; //aramazenará o melhor fitness
-			int melhorPosicao = 0; //armazenará posição na população referente a melhor solução
+			int melhorResultado = 0; //aramazenarÃ¡ o melhor fitness
+			int melhorPosicao = 0; //armazenarÃ¡ posiÃ§Ã£o na populaÃ§Ã£o referente a melhor soluÃ§Ã£o
 			pontuacao.clear(); //limpa a lista de fitness
 			for (int y=0; y<numPopulacaoInicial; y++){
 				
@@ -116,21 +116,21 @@ public class Main {
 			//lista que ira armazenar individuos da geracao
 			List<List> geracao = new ArrayList<List>();
 			
-			//lista que ira armazenar pontuação da geracao
+			//lista que ira armazenar pontuaÃ§Ã£o da geracao
 			List<Integer> pontuacaoGeracao = new ArrayList<Integer>();
 
 			
 			//implementando elitismo
 			geracao.add(populacao.get(melhorPosicao));
 			
-			//for para selecionar os individuos que vão direto para a proxima geracao
+			//for para selecionar os individuos que vÃ£o direto para a proxima geracao
 			for (int j = 1; j < numeroSelecao; j++) {
 			
 				
 				geracao.add(p0.torneioBinario(pontuacao, populacao));
 			}
 			
-			//laço para cruzar individuos
+			//laÃ§o para cruzar individuos
 			for (int k = 0; k < numeroFilhos; k++) {
 				
 				List<List> filhosSelecionados = new ArrayList<List>();
@@ -145,22 +145,25 @@ public class Main {
 				
 				}
 			
-			//laço para realizar mutacao dos individuos, comeco em 1 para que o primeiro individuo (o eleito da geracao anterior) não seja mutado
-			for (int z = 1; z < numeroMutacao; z++) {
+			//realiza a mutacao dos individuos
+			for (int z = 0; z < numeroMutacao; z++) {
+				List<Integer> individuoMutado = new ArrayList<Integer>();
 				Random r = new Random();
-				int indiceSorteado = r.nextInt(populacao.size());
-				geracao.set(indiceSorteado,p0.reparo(p0.realizaMutacao(geracao.get(indiceSorteado)),requisitos,releases));
+				int indiceSorteado = r.nextInt(populacao.size()-1) + 1; //soma 1 por conta do elitismo
+				individuoMutado = p0.realizaMutacao(geracao.get(indiceSorteado));
+				individuoMutado = p0.reparo(individuoMutado,requisitos,releases);
+				geracao.set(indiceSorteado, individuoMutado);
 			//	geracao.set(indiceSorteado,p0.realizaMutacao(geracao.get(indiceSorteado)));
 			}
 
 			
-			System.out.print("*** Melhor Solução da geracao " + i + "      Fitness: " + melhorResultado + "     Posição: " + melhorPosicao + "   ' Vetor: [");
+			System.out.println("*** Melhor SoluÃ§Ã£o da geracao " + i + "      Fitness: " + melhorResultado + "     PosiÃ§Ã£o: " + melhorPosicao + "   ' Vetor: " + populacao.get(melhorPosicao));
 			
-			for (int j=0; j<individuo.size()-1; j++){
+		/*	for (int j=0; j<individuo.size()-1; j++){
 				System.out.print(populacao.get(melhorPosicao).get(j) + ", ");
 			}
 			
-			System.out.println(populacao.get(melhorPosicao).get(individuo.size()-1) + "] ");
+			System.out.println(populacao.get(melhorPosicao).get(individuo.size()-1) + "] ");*/
 
 			populacao.clear();
 			pontuacao.clear();
@@ -168,8 +171,8 @@ public class Main {
 			populacao = geracao;
 			pontuacao = pontuacaoGeracao;
 			
-			System.out.println(populacao.size());
-			System.out.println(pontuacao.size());
+			//System.out.println(populacao);
+			//System.out.println(pontuacao);
 			
 		}
 		
