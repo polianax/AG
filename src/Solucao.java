@@ -156,25 +156,25 @@ public class Solucao {
 			} else if(releaseSorteada == 1){
 				if (req.get(requisitosZerados.get(r)).getCusto() <= rel.get(releaseSorteada).getCusto()-custoR2){
 					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
-					custoR1 = custoR2 + req.get(r).getCusto(); 
+					custoR2 = custoR2 + req.get(r).getCusto(); 
 				}
-			} else (releaseSorteada == 2){
+			} else if(releaseSorteada == 2){
 				if (req.get(requisitosZerados.get(r)).getCusto() <= rel.get(releaseSorteada).getCusto()-custoR3){
 					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
-					custoR1 = custoR3 + req.get(r).getCusto(); 
+					custoR3 = custoR3 + req.get(r).getCusto(); 
 				}
-			} 
+			}
 
 		}
 		
-
 		return individuo;
 	}
 	
 	public List realizaMutacao (List<Integer> individuo) {
 		
 		Random r = new Random();
-		individuo.set(r.nextInt(individuo.size()), r.nextInt(4));
+		int releaseSorteada = r.nextInt(4);
+		individuo.set(r.nextInt(individuo.size()), releaseSorteada);
 		
 		return individuo;
 	}
