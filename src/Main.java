@@ -13,7 +13,7 @@ public class Main {
 		
 		double taxaMutacao = 0.15;
 		double taxaCruzamento = 0.90;
-		int numGeracoes = 300;
+		int numGeracoes = 30;
 		int numPopulacaoInicial = 100;
 		int c1 = 3;
 		int c2 = 4;
@@ -74,9 +74,9 @@ public class Main {
 		
 		for (int i = 0; i < numGeracoes; i++) {
 			
-			//Math m = new Math();
 			double numeroSelecao = Math.round((1-taxaCruzamento) * numPopulacaoInicial);
 			double numeroFilhos = numPopulacaoInicial - numeroSelecao;
+			double numeroMutacao = Math.round(numPopulacaoInicial * taxaMutacao);
 			
 			//lista que ira armazenar individuos da geracao
 			List<List> geracao = new ArrayList<List>();
@@ -90,6 +90,7 @@ public class Main {
 				geracao.add(p0.torneioBinario(pontuacao, populacao));
 			}
 			
+			//laço para cruzar individuos
 			for (int k = 0; k < numeroFilhos; k=k+2) {
 				
 				List<List> filhosSelecionados = new ArrayList<List>();
@@ -103,14 +104,44 @@ public class Main {
 				
 			}
 			
+			//laço para realizar mutacao dos individuos
+			for (int z = 0; z < numeroMutacao; z++) {
+				Random r = new Random();
+				int indiceSorteado = r.nextInt(populacao.size());
+				geracao.set(indiceSorteado,p0.reparo(p0.realizaMutacao(geracao.get(indiceSorteado)),requisitos,releases));
+			}
 
+			int melhorResultado = 0;
+			int melhorPosicao = 0;
+			
+			for (int y=0; y<numPopulacaoInicial; y++){
+				
+				int  fit = p0.fitness(geracao.get(i), requisitos, releases);
+				pontuacaoGeracao.add(fit);
+				
+				if (melhorResultado<pontuacao.get(y)){
+					melhorResultado=pontuacao.get(y);
+					melhorPosicao = y;
+				}
+
+			}
+			
+			System.out.println("************ Melhor Solução da geracao" + i + " :" + melhorResultado + " Posição: " + melhorPosicao);
+			
+			for (int j=0; j<individuo.size(); j++){
+				System.out.print(geracao.get(melhorPosicao).get(j) + ", ");
+			}
+			
+			populacao = geracao;
+			
+			
 			
 		}
 		
 		
 		
 		//abaixo apenas impressões para teste
-		System.out.println(" ");
+	/*	System.out.println(" ");
 		
 		int melhorResultado = 0;
 		int melhorPosicao = 0;

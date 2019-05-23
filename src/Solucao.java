@@ -72,6 +72,7 @@ public class Solucao {
 			filho2.add(pai1.get(j));
 			filho1.add(pai2.get(j));
 		}
+		
 		filhos.add(filho1);
 		filhos.add(filho2);
 		
