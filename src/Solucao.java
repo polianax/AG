@@ -23,7 +23,7 @@ public class Solucao {
 		List<Integer> individuo = new ArrayList<Integer>();
 		List<Integer> vetorEmb = new ArrayList<Integer>();
 		
-		//gera vetor solução e vetor a ser embaralhado para auxiliar na geração da população inicial
+		//gera vetor soluÃ§Ã£o e vetor a ser embaralhado para auxiliar na geraÃ§Ã£o da populaÃ§Ã£o inicial
 		for (int i = 0; i < contadorRequisitos; i++){
 			individuo.add(0);
 			vetorEmb.add(i);
@@ -97,7 +97,7 @@ public class Solucao {
 		return vencedor;
 	}
 
-	//obs: como o reparo só "funciona" para soluções inválidas, posso chamá-lo sempre que realizar um cruzamento ou mutação
+	//obs: como o reparo sÃ³ "funciona" para soluÃ§Ãµes invÃ¡lidas, posso chamÃ¡-lo sempre que realizar um cruzamento ou mutaÃ§Ã£o
 	public List reparo(List<Integer> individuo, List<Requisito> req, List<Release> rel){
 		
 		int custoR1 = 0;
@@ -153,7 +153,17 @@ public class Solucao {
 					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
 					custoR1 = custoR1 + req.get(r).getCusto(); 
 				}
-			}
+			} else if(releaseSorteada == 1){
+				if (req.get(requisitosZerados.get(r)).getCusto() <= rel.get(releaseSorteada).getCusto()-custoR2){
+					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
+					custoR1 = custoR2 + req.get(r).getCusto(); 
+				}
+			} else (releaseSorteada == 2){
+				if (req.get(requisitosZerados.get(r)).getCusto() <= rel.get(releaseSorteada).getCusto()-custoR3){
+					individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
+					custoR1 = custoR3 + req.get(r).getCusto(); 
+				}
+			} 
 
 		}
 		
