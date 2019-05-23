@@ -95,32 +95,47 @@ public class Solucao {
 		return vencedor;
 	}
 
+	//obs: como o reparo só "funciona" para soluções inválidas, posso chamá-lo sempre que realizar um cruzamento ou mutação
 	public List reparo(List<Integer> individuo, List<Requisito> req, List<Release> rel){
 		
 		int custoR1 = 0;
 		int custoR2 = 0;
 		int custoR3 = 0;
 		
-		//obtendo o custo de cada release
+		//obtendo o custo de cada release e atribuindo zero para o requisito que provocar o estouro da release
 		for (int i = 0; i < individuo.size(); i++) {
 			
-			if (individuo.get(i) = 1) {
+			if (individuo.get(i) == 1) {
 				
 				custoR1 = custoR1 + req.get(i).getCusto();
-				
-			} else if (individuo.get(i) = 2) {
+				if (custoR1 > rel.get(0).getCusto()) {
+					individuo.set(i, 0);
+				}
+			} else if (individuo.get(i) == 2) {
 				
 				custoR2 = custoR2 + req.get(i).getCusto();
-				
-			} else if (individuo.get(i)=3) {
+				if (custoR2 > rel.get(1).getCusto()) {
+					individuo.set(i, 0);
+				}
+			} else if (individuo.get(i) == 3) {
 				
 				custoR3 = custoR3 + req.get(i).getCusto();
-				
+				if (custoR3 > rel.get(2).getCusto()) {
+					individuo.set(i, 0);
+				}
 			} else {
 				
 			}
 		}
 
+		return individuo;
+	}
+	
+	public List realizaMutacao (List<Integer> individuo) {
+		
+		Random r = new Random();
+		individuo.set(r.nextInt(individuo.size()), r.nextInt(4));
+		
 		return individuo;
 	}
 }
