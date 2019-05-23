@@ -69,8 +69,8 @@ public class Solucao {
 		}
 		
 		for (int j = pontoCorte; j < pai1.size() ; j++) {
-			filho2.add(pai1.get(j));
-			filho1.add(pai2.get(j));
+			filho2.add(pai2.get(j));
+			filho1.add(pai1.get(j));
 		}
 		
 		filhos.add(filho1);
@@ -81,7 +81,7 @@ public class Solucao {
 
 	public List torneioBinario(List<Integer> pontuacao, List<List> populacao){
 		
-		List<List> vencedor = new ArrayList<List>();
+		List<Integer> vencedor = new ArrayList<Integer>();
 		
 		Random r = new Random();
 		int indice1 = r.nextInt(populacao.size());
@@ -105,6 +105,7 @@ public class Solucao {
 		rel.get(0).setCusto(125);
 		rel.get(1).setCusto(125);
 		rel.get(2).setCusto(125);
+		List<Integer> requisitosZerados = new ArrayList<Integer>();
 		
 		//obtendo o custo de cada release e atribuindo zero para o requisito que provocar o estouro da release
 		for (int i = 0; i < individuo.size(); i++) {
@@ -131,6 +132,22 @@ public class Solucao {
 				
 			}
 		}
+		for (int i = 0; i < individuo.size(); i++) {
+			if (individuo.get(i) == 0) {
+				requisitosZerados.add(i);
+			}
+		} 
+		//embaralha os requisitos ainda zerados
+		Collections.shuffle(requisitosZerados);
+		
+		for (int r = 0; r < requisitosZerados.size(); r++) {
+			Random x = new Random();
+			int releaseSorteada = x.nextInt(rel.size());
+			if (requisitosZerados.get(r) >= rel.get(releaseSorteada).getCusto()){
+				individuo.set(requisitosZerados.get(r), (releaseSorteada+1));
+			}
+		}
+		
 
 		return individuo;
 	}
