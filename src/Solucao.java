@@ -61,6 +61,7 @@ public class Solucao {
 		int tamanhoIndividuo = pai1.size();
 		Random r = new Random();
 		int pontoCorte = r.nextInt(tamanhoIndividuo-1)+1;
+	//	int pontoCorte = 3;
 		
 		
 		for (int i = 0; i < pontoCorte ; i++) {

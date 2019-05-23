@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 import java.lang.Math;
 
 public class Main {
@@ -14,7 +12,7 @@ public class Main {
 		double taxaMutacao = 0.0;
 		double taxaCruzamento = 0.90;
 		int numGeracoes = 300;
-		int numPopulacaoInicial = 100;
+		int numPopulacaoInicial = 300;
 		int c1 = 3;
 		int c2 = 4;
 		int c3 = 2;
@@ -42,7 +40,7 @@ public class Main {
 		releases.add(new Release(125,2));
 		releases.add(new Release(125,3));
 			
-		//gerando populacao inicial e armazena na solução
+		//gerando populacao inicial e armazenando na populacao
 		
 		//instanciando solucao
 		Solucao p0 = new Solucao();
@@ -91,11 +89,17 @@ public class Main {
 		System.out.println(populacao.get(melhorPosInicial).get(individuo.size()-1) + "] ");
 		System.out.println(populacao.size());
 		
+		
+		double numeroSelecao = Math.round((1-taxaCruzamento) * numPopulacaoInicial);
+		double numeroFilhos = (numPopulacaoInicial - numeroSelecao)/2;
+		double numeroMutacao = Math.round(numPopulacaoInicial * taxaMutacao);
+
+		
 		//aqui ocorrem os operadores de cruzamento, mutação e seleção pelo número de gerações selecionadas
 		for (int i = 0; i < numGeracoes; i++) {
 			
-			int melhorResultado = 0; //aramazenara o melhor fitness
-			int melhorPosicao = 0; //armazenara a posicao na população referente a melhor solução
+			int melhorResultado = 0; //aramazenará o melhor fitness
+			int melhorPosicao = 0; //armazenará posição na população referente a melhor solução
 			pontuacao.clear(); //limpa a lista de fitness
 			for (int y=0; y<numPopulacaoInicial; y++){
 				
@@ -109,10 +113,6 @@ public class Main {
 				
 			}
 			
-			double numeroSelecao = Math.round((1-taxaCruzamento) * numPopulacaoInicial);
-			double numeroFilhos = (numPopulacaoInicial - numeroSelecao)/2;
-			double numeroMutacao = Math.round(numPopulacaoInicial * taxaMutacao);
-			
 			//lista que ira armazenar individuos da geracao
 			List<List> geracao = new ArrayList<List>();
 			
@@ -124,7 +124,7 @@ public class Main {
 			geracao.add(populacao.get(melhorPosicao));
 			
 			//for para selecionar os individuos que vão direto para a proxima geracao
-			for (int j = 0; j < numeroSelecao-1; j++) {
+			for (int j = 1; j < numeroSelecao; j++) {
 			
 				
 				geracao.add(p0.torneioBinario(pontuacao, populacao));
@@ -143,8 +143,7 @@ public class Main {
 				geracao.add(filhosSelecionados.get(0));
 				geracao.add(filhosSelecionados.get(1));
 				
-				
-			}
+				}
 			
 			//laço para realizar mutacao dos individuos, comeco em 1 para que o primeiro individuo (o eleito da geracao anterior) não seja mutado
 			for (int z = 1; z < numeroMutacao; z++) {
@@ -163,13 +162,14 @@ public class Main {
 			
 			System.out.println(populacao.get(melhorPosicao).get(individuo.size()-1) + "] ");
 
-
+			populacao.clear();
+			pontuacao.clear();
+			
 			populacao = geracao;
 			pontuacao = pontuacaoGeracao;
 			
 			System.out.println(populacao.size());
 			System.out.println(pontuacao.size());
-			
 			
 		}
 		
