@@ -78,22 +78,49 @@ public class Solucao {
 		return filhos;
 	}
 
-	public List roleta(List<Integer> pontuacao){
+	public List torneioBinario(List<Integer> pontuacao, List<List> populacao){
 		
-		int totalFitness = 0;
-		
-		for (int i = 0; i < pontuacao.size(); i++) {
-
-			totalFitness = pontuacao.get(i);
-		}
+		List<List> vencedor = new ArrayList<List>();
 		
 		Random r = new Random();
-		int valorSorteado = r.nextInt(totalFitness);
+		int indice1 = r.nextInt(populacao.size());
+		int indice2 = r.nextInt(populacao.size());
 		
+		if (indice1 >= indice2) {
+			vencedor = populacao.get(indice1);
+		} else{
+			vencedor = populacao.get(indice2);
+		}
 		
-		List<Integer> novos = new ArrayList<Integer>();
-		
-		return novos;
+		return vencedor;
 	}
 
+	public List reparo(List<Integer> individuo, List<Requisito> req, List<Release> rel){
+		
+		int custoR1 = 0;
+		int custoR2 = 0;
+		int custoR3 = 0;
+		
+		//obtendo o custo de cada release
+		for (int i = 0; i < individuo.size(); i++) {
+			
+			if (individuo.get(i) = 1) {
+				
+				custoR1 = custoR1 + req.get(i).getCusto();
+				
+			} else if (individuo.get(i) = 2) {
+				
+				custoR2 = custoR2 + req.get(i).getCusto();
+				
+			} else if (individuo.get(i)=3) {
+				
+				custoR3 = custoR3 + req.get(i).getCusto();
+				
+			} else {
+				
+			}
+		}
+
+		return individuo;
+	}
 }
