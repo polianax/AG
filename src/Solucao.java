@@ -102,6 +102,9 @@ public class Solucao {
 		int custoR1 = 0;
 		int custoR2 = 0;
 		int custoR3 = 0;
+		rel.get(0).setCusto(125);
+		rel.get(1).setCusto(125);
+		rel.get(2).setCusto(125);
 		
 		//obtendo o custo de cada release e atribuindo zero para o requisito que provocar o estouro da release
 		for (int i = 0; i < individuo.size(); i++) {

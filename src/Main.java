@@ -13,7 +13,7 @@ public class Main {
 		
 		double taxaMutacao = 0.15;
 		double taxaCruzamento = 0.90;
-		int numGeracoes = 30;
+		int numGeracoes = 200;
 		int numPopulacaoInicial = 100;
 		int c1 = 3;
 		int c2 = 4;
@@ -96,8 +96,10 @@ public class Main {
 				List<List> filhosSelecionados = new ArrayList<List>();
 				filhosSelecionados = p0.cruzamento(p0.torneioBinario(pontuacao, populacao), p0.torneioBinario(pontuacao, populacao));
 				//reparando filhos obtidos
-				filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
+			    filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
 				filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
+			//	filhosSelecionados.set(0,filhosSelecionados.get(0));
+			//	filhosSelecionados.set(1,filhosSelecionados.get(1));
 				geracao.add(filhosSelecionados.get(0));
 				geracao.add(filhosSelecionados.get(1));
 				
@@ -109,6 +111,7 @@ public class Main {
 				Random r = new Random();
 				int indiceSorteado = r.nextInt(populacao.size());
 				geracao.set(indiceSorteado,p0.reparo(p0.realizaMutacao(geracao.get(indiceSorteado)),requisitos,releases));
+			//	geracao.set(indiceSorteado,p0.realizaMutacao(geracao.get(indiceSorteado)));
 			}
 
 			int melhorResultado = 0;
@@ -116,11 +119,11 @@ public class Main {
 			
 			for (int y=0; y<numPopulacaoInicial; y++){
 				
-				int  fit = p0.fitness(geracao.get(i), requisitos, releases);
-				pontuacaoGeracao.add(fit);
+				int  fitGeracao = p0.fitness(geracao.get(y), requisitos, releases);
+				pontuacaoGeracao.add(fitGeracao);
 				
-				if (melhorResultado<pontuacao.get(y)){
-					melhorResultado=pontuacao.get(y);
+				if (melhorResultado<pontuacaoGeracao.get(y)){
+					melhorResultado=pontuacaoGeracao.get(y);
 					melhorPosicao = y;
 				}
 
@@ -133,6 +136,7 @@ public class Main {
 			}
 			
 			populacao = geracao;
+			pontuacao = pontuacaoGeracao;
 			
 			
 			
