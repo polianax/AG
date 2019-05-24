@@ -17,17 +17,18 @@ public class teste {
 		List<Integer> pai1 = new ArrayList<Integer>();
 		List<Integer> pai2 = new ArrayList<Integer>();
 		List<List> filhos = new ArrayList<List>();
-		
-		pai1.add(2);
-		pai1.add(1);
-		pai1.add(2);
-		pai1.add(1);
-		pai1.add(2);
-		pai1.add(3);
-		pai1.add(1);
+
+
+		pai1.add(0);
+		pai1.add(0);
+		pai1.add(0);
+		pai1.add(0);
+		pai1.add(0);
+		pai1.add(0);
 		pai1.add(0);
 		pai1.add(3);
 		pai1.add(1);
+		pai1.add(2);
 		
 		pai2.add(3);
 		pai2.add(1); 
@@ -65,21 +66,21 @@ public class teste {
 		
 		filhos = p0.cruzamento(pai1, pai2);
 		
-		for (int i = 0; i < pai1.size(); i++) {
+	/*	for (int i = 0; i < pai1.size(); i++) {
 			System.out.print(filhos.get(0).get(i) + " ");
 			System.out.println(filhos.get(1).get(i));
-		}
+		}*/
 		 
-		System.out.println("  ");
+		System.out.println("Resultado do reparo: " + p0.reparo(pai1, requisitos, releases));
 		
-		filhos.set(0, p0.reparo(filhos.get(0), requisitos, releases));
+	/*	filhos.set(0, p0.reparo(filhos.get(0), requisitos, releases));
 		filhos.set(1, p0.reparo(filhos.get(1), requisitos, releases));
 
 		
 		for (int i = 0; i < pai1.size(); i++) {
 			System.out.print(filhos.get(0).get(i) +" ");
 			System.out.println(filhos.get(1).get(i));
-		}
+		}*/
 	
 	}
 }

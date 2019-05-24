@@ -97,7 +97,7 @@ public class Solucao {
 		return vencedor;
 	}
 
-	//obs: como o reparo só "funciona" para soluções inválidas, posso chamá-lo sempre que realizar um cruzamento ou mutação
+	//obs: como o reparo so "funciona" para solucoes invalidas, posso chama-lo sempre que realizar um cruzamento ou mutacao
 	public List reparo(List<Integer> individuo, List<Requisito> req, List<Release> rel){
 		
 		int custoR1 = 0;
@@ -177,5 +177,30 @@ public class Solucao {
 		individuo.set(r.nextInt(individuo.size()), releaseSorteada);
 		
 		return individuo;
+	}
+	
+	public boolean validaSolucao(List<Integer> individuo, List<Requisito> requisitos, List <Release> releases) {
+		
+		int custoR1 = 0;
+		int custoR2 = 0;
+		int custoR3 = 0;
+		
+		for (int j = 0; j < individuo.size(); j++) {
+			
+			if (individuo.get(j) == 1) {
+				custoR1 = custoR1 + requisitos.get(j).getCusto();					
+			} else if (individuo.get(j) == 1) {
+				custoR2 = custoR2 + requisitos.get(j).getCusto();					
+			} else if (individuo.get(j) == 1) {
+				custoR3 = custoR3 + requisitos.get(j).getCusto();					
+			}
+		}
+			
+		if (custoR1 > releases.get(0).getCusto() && custoR2 > releases.get(1).getCusto() && custoR3 > releases.get(2).getCusto()){
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 }

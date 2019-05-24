@@ -9,7 +9,7 @@ public class Main {
 		
 		//parametros da GA
 		
-		double taxaMutacao = 0.00;
+		double taxaMutacao = 0;
 		double taxaCruzamento = 0.90;
 		int numGeracoes = 300;
 		int numPopulacaoInicial = 300;
@@ -80,22 +80,15 @@ public class Main {
 		// imprime informações referente a populacao inicial
 
 		
-		System.out.print("*** Melhor solução incial  -----  Fitness: " + melhorInicial + "     Posição: " + melhorPosInicial + "   ' Vetor: [");
-		
-		/*for (int j=0; j<individuo.size()-1; j++){
-			System.out.print(populacao.get(melhorInicial).get(j) + ", ");
-		}*/
-		
-		System.out.println(populacao.get(melhorPosInicial).get(individuo.size()-1) + "] ");
-		System.out.println(populacao.size());
-		
+		System.out.println("*** Melhor solucao incial  -----  Fitness: " + melhorInicial + "     Posicao: " + melhorPosInicial + "    Vetor: " + populacao.get(melhorPosInicial));
+				
 		
 		double numeroSelecao = Math.round((1-taxaCruzamento) * numPopulacaoInicial);
 		double numeroFilhos = (numPopulacaoInicial - numeroSelecao)/2;
 		double numeroMutacao = Math.round(numPopulacaoInicial * taxaMutacao);
 
 		
-		//aqui ocorrem os operadores de cruzamento, mutação e seleção pelo número de gerações selecionadas
+		//aqui ocorrem os operadores de cruzamento, mutacao e selecao pelo n�mero de geracoes selecionadas
 		for (int i = 0; i < numGeracoes; i++) {
 			
 			int melhorResultado = 0; //aramazenará o melhor fitness
@@ -136,8 +129,17 @@ public class Main {
 				List<List> filhosSelecionados = new ArrayList<List>();
 				filhosSelecionados = p0.cruzamento(p0.torneioBinario(pontuacao, populacao), p0.torneioBinario(pontuacao, populacao));
 				//reparando filhos obtidos
-				filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
-				filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
+				if (p0.validaSolucao(filhosSelecionados.get(0), requisitos, releases)) {
+					filhosSelecionados.set(0,filhosSelecionados.get(0));
+				} else {
+					filhosSelecionados.set(0,p0.reparo(filhosSelecionados.get(0), requisitos, releases));
+				}
+				if (p0.validaSolucao(filhosSelecionados.get(1), requisitos, releases)) {
+					filhosSelecionados.set(1,filhosSelecionados.get(1));
+				} else {
+					filhosSelecionados.set(1,p0.reparo(filhosSelecionados.get(1), requisitos, releases));
+				}
+				
 			//	filhosSelecionados.set(0,filhosSelecionados.get(0));
 			//	filhosSelecionados.set(1,filhosSelecionados.get(1));
 				geracao.add(filhosSelecionados.get(0));
@@ -151,13 +153,18 @@ public class Main {
 				Random r = new Random();
 				int indiceSorteado = r.nextInt(populacao.size()-1) + 1; //soma 1 por conta do elitismo
 				individuoMutado = p0.realizaMutacao(geracao.get(indiceSorteado));
-				individuoMutado = p0.reparo(individuoMutado,requisitos,releases);
-				geracao.set(indiceSorteado, individuoMutado);
+				if (p0.validaSolucao(individuoMutado, requisitos, releases)){
+					geracao.set(indiceSorteado, individuoMutado);
+				} else {
+					geracao.set(indiceSorteado, individuoMutado);
+					individuoMutado = p0.reparo(individuoMutado,requisitos,releases);
+				}
+				
 			//	geracao.set(indiceSorteado,p0.realizaMutacao(geracao.get(indiceSorteado)));
 			}
 
 			
-			System.out.println("*** Melhor Solução da geracao " + i + "      Fitness: " + melhorResultado + "     Posição: " + melhorPosicao + "   ' Vetor: " + populacao.get(melhorPosicao));
+			System.out.println("*** Melhor Solucao da geracao " + i + "      Fitness: " + melhorResultado + "     Posicao: " + melhorPosicao + "   ' Vetor: " + populacao.get(melhorPosicao));
 			
 		/*	for (int j=0; j<individuo.size()-1; j++){
 				System.out.print(populacao.get(melhorPosicao).get(j) + ", ");
