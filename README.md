@@ -1,2 +1,2 @@
 # AG
-Trabalho de AG sobre problema do planejamento de releases
+AG para resolução do problema de planejamento de releases
